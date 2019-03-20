@@ -36,9 +36,21 @@ public class Start {
 		
 		Populacja populacja = new Populacja();
 		populacja.initialize(pop_size, cities);
-		populacja.printPoulation();
 		
-		TSP tsp = new TSP(v_min, v_max, weight_max);
+		TTP ttp = new TTP(weight_max, v_min, v_max, cities);
+		Operatory operatory = new Operatory(ttp);
+		
+		int generation = 1;
+		while(generation <= gen) {
+			ArrayList<Osobnik> osobniki = populacja.getOsobniki();
+			System.out.println("generacja: "+generation);
+			ArrayList<Osobnik> parents = operatory.selection(osobniki, tour);
+			for(Osobnik o : parents) {
+				System.out.println(o);
+			}
+			generation++;
+			System.out.println("\n\n\n");
+		}
 
 	}
 

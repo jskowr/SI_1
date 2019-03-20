@@ -3,13 +3,13 @@ import java.util.List;
 
 public class Populacja {
 
-	private List<Osobnik> osobniki;
+	private ArrayList<Osobnik> osobniki;
 
-	public List<Osobnik> getOsobniki() {
+	public ArrayList<Osobnik> getOsobniki() {
 		return osobniki;
 	}
 
-	public void setOsobiniki(List<Osobnik> osobniki) {
+	public void setOsobiniki(ArrayList<Osobnik> osobniki) {
 		this.osobniki = osobniki;
 	}
 	
@@ -27,7 +27,7 @@ public class Populacja {
 	
 	public void initialize(int populationSize, ArrayList<Miasto> cities) {
 		for(int i=1; i<=populationSize; i++) {
-			List<Integer> sequence = new ArrayList<Integer>();
+			ArrayList<Integer> sequence = new ArrayList<Integer>();
 			
 			for(Miasto m : cities) {
 				sequence.add(m.getIndex());

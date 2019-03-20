@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Osobnik {
 	
-	private List<Integer> sequence;
+	private ArrayList<Integer> sequence;
 	
-	public List<Integer> getSequence() {
+	public ArrayList<Integer> getSequence() {
 		return sequence;
 	}
 
@@ -14,7 +14,7 @@ public class Osobnik {
 		this.sequence = sequence;
 	}
 
-	public Osobnik(List<Integer> seq) {
+	public Osobnik(ArrayList<Integer> seq) {
 		 this.sequence = seq;
 	}
 	

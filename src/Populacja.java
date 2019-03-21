@@ -9,7 +9,7 @@ public class Populacja {
 		return osobniki;
 	}
 
-	public void setOsobiniki(ArrayList<Osobnik> osobniki) {
+	public void setOsobniki(ArrayList<Osobnik> osobniki) {
 		this.osobniki = osobniki;
 	}
 	

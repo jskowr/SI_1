@@ -33,8 +33,9 @@ public class Operatory {
 			}
 			
 			if(!tour_members.isEmpty()) {
+				Osobnik parent = null;
 			double max = ttp.evaluate_function_G(tour_members.get(0).getSequence());
-			Osobnik parent = null;
+			parent = tour_members.get(0);
 			for(Osobnik o: tour_members) {
 				double current = ttp.evaluate_function_G(o.getSequence());
 				if(current > max) { 
@@ -67,7 +68,7 @@ public class Operatory {
 		}
 		}
 	
-	public Osobnik crossover(Osobnik osobnik1, Osobnik osobnik2, int px) {
+	public Osobnik crossover(Osobnik osobnik1, Osobnik osobnik2, double px) {
 		Random random = new Random();
 		double number = random.nextDouble();
 		if(px > number) {

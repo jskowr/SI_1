@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class Operatory {
@@ -71,6 +72,7 @@ public class Operatory {
 	public Osobnik crossover(Osobnik osobnik1, Osobnik osobnik2, double px) {
 		Random random = new Random();
 		double number = random.nextDouble();
+		ArrayList<Integer> cities = osobnik1.getSequence();
 		if(px > number) {
 			ArrayList<Integer> sequence1 = osobnik1.getSequence();
 			ArrayList<Integer> sequence2 = osobnik2.getSequence();
@@ -80,6 +82,28 @@ public class Operatory {
 				if(i<=divide_point) nowa_sekwencja.add(sequence1.get(i));
 				else nowa_sekwencja.add(sequence2.get(i));
 			}
+			
+			ArrayList<Integer> indexes = new ArrayList<Integer>();
+			ArrayList<Integer> duplicated = new ArrayList<Integer>();
+			
+			for(int i=0; i<nowa_sekwencja.size(); i++) {
+				if(!duplicated.contains(nowa_sekwencja.get(i))) {
+				int freq = Collections.frequency(nowa_sekwencja, nowa_sekwencja.get(i));
+				duplicated.add(nowa_sekwencja.get(i));
+				if(freq > 1) {
+					indexes.add(i);
+				}
+				}
+			}
+			
+			for(int i=0; i<cities.size(); i++) {
+				if(!nowa_sekwencja.contains(cities.get(i))) {
+					int index = indexes.get(indexes.size()-1);
+					nowa_sekwencja.set(index, cities.get(i));
+					indexes.remove(indexes.size()-1);
+				}
+			}
+			
 			Osobnik potomek = new Osobnik(nowa_sekwencja);
 			osobnik1 = null;
 			osobnik2 = null;

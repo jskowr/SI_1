@@ -85,7 +85,7 @@ public class Loader {
 		this.renting_ratio = renting_ratio;
 	}
 	
-	public void choose() {
+	public String choose() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Wybierz plik (trivial, easy, medium, hard) odpowiednio numerowany (0, 1, 2, 3, 4) np. trivial_0: ");
 		String f = scan.nextLine();
@@ -133,5 +133,6 @@ public class Loader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return f;
 	}
 }

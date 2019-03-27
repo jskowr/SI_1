@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -9,10 +10,30 @@ public class Start {
 
 	public static void main(String[] args) {
 		
-		Random random = new Random();
+		ArrayList<String> files = new ArrayList<String>();
+		files.add("trivial_0");
+		files.add("trivial_1");
+		files.add("easy_0");
+		files.add("easy_1");
+		files.add("easy_2");
+		files.add("easy_3");
+		files.add("easy_4");
+		files.add("medium_0");
+		files.add("medium_1");
+		files.add("medium_2");
+		files.add("medium_3");
+		files.add("medium_4");
+		files.add("hard_0");
+		files.add("hard_1");
+		files.add("hard_2");
+		files.add("hard_3");
+		files.add("hard_4");
 		
+		for(String plik : files) {
+		
+		Random random = new Random();
 		Loader loader = new Loader();
-		String file_name = loader.choose();
+		String file_name = loader.load(plik);
 		File file = new File("./results/generations_"+file_name+".txt");
 		
 		//parametry z pliku
@@ -67,6 +88,11 @@ public class Start {
 			e.printStackTrace();
 		}
 		
+		
+		ArrayList<Long> gen_best = new ArrayList<Long>();
+		ArrayList<Long> gen_worst = new ArrayList<Long>();
+		ArrayList<Long> gen_avg = new ArrayList<Long>();
+		
 		while(generation <= gen) {
 			eval_count = 0;
 			f = true;
@@ -84,10 +110,16 @@ public class Start {
 				}
 				if(current_eval > eval) { eval = current_eval; best = o; } 
 			}
+			
+			gen_best.add(Math.round(best_eval));
+			gen_worst.add(Math.round(worst_eval));
+			gen_avg.add(Math.round(eval_count/pop_size));
+			
 			if(!nowe_osobniki.isEmpty()) { populacja.setOsobniki(nowe_osobniki); } 
 			nowe_osobniki = new ArrayList<Osobnik>();
 			ArrayList<Osobnik> osobniki = populacja.getOsobniki();
-			ArrayList<Osobnik> parents = operatory.selection(osobniki, tour);
+			//ArrayList<Osobnik> parents = operatory.selection_tournament(osobniki, tour);
+			ArrayList<Osobnik> parents = operatory.selection_roulete(osobniki);
 			
 			int liczba_osobnikow = 0;
 			while(liczba_osobnikow < pop_size) {
@@ -118,9 +150,17 @@ public class Start {
 			generation++;
 		}
 		writer.close();
+		
+		Wykresy wykres = new Wykresy();
+		try {
+			wykres.draw_chart(file_name, gen_best, gen_worst, gen_avg);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		System.out.println("najlepszy osobnik: ");
 		System.out.println(best);
-
+		}
 	}
 
 }

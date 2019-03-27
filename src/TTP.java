@@ -20,7 +20,8 @@ public class TTP {
 		KNP knp = new KNP(weight_max);
 		TSP tsp = new TSP(v_min, v_max, weight_max);
 		
-		return Math.abs(knp.g_function(first, cities) - tsp.f_function(sequence, cities));
+		//return Math.abs(knp.g_function(first, cities) - tsp.f_function(sequence, cities));
+		return (knp.g_function(first, cities) - tsp.f_function(sequence, cities));
 	}
 	
 }

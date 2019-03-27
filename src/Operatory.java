@@ -10,7 +10,7 @@ public class Operatory {
 		this.ttp = ttp;
 	}
 	
-	public ArrayList<Osobnik> selection(ArrayList<Osobnik> osobniki, int tours) {
+	public ArrayList<Osobnik> selection_tournament(ArrayList<Osobnik> osobniki, int tours) {
 		
 		Random random = new Random();
 		
@@ -51,6 +51,36 @@ public class Operatory {
 		
 		return parents;
 	}
+	
+	
+	
+public ArrayList<Osobnik> selection_roulete(ArrayList<Osobnik> osobniki) {
+		
+		Random random = new Random();
+		
+		ArrayList<Osobnik> parents = new ArrayList<Osobnik>();
+		int size = osobniki.size();
+		
+		long total = 0;
+		
+		for(int i=0; i<size; i++) {
+			total += ttp.evaluate_function_G(osobniki.get(i).getSequence());
+		}
+		
+		long current = 0;
+		
+		for(int i=0; i<size; i++) {
+			long rand = random.nextLong();
+			for(int j=0; j<size; j++) {
+			current += ttp.evaluate_function_G(osobniki.get(i).getSequence());
+			if(rand < current) { parents.add(osobniki.get(i)); break; }
+			}
+		}
+		
+		return parents;
+	}
+	
+	
 	
 	public void mutation(Osobnik osobnik, double pm) {
 		Random random = new Random();

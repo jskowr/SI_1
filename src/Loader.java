@@ -85,10 +85,12 @@ public class Loader {
 		this.renting_ratio = renting_ratio;
 	}
 	
-	public String choose() {
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Wybierz plik (trivial, easy, medium, hard) odpowiednio numerowany (0, 1, 2, 3, 4) np. trivial_0: ");
-		String f = scan.nextLine();
+	public String load(String f) {
+//		Scanner scan = new Scanner(System.in);
+//		System.out.println("Wybierz plik (trivial, easy, medium, hard) odpowiednio numerowany (0, 1, 2, 3, 4) np. trivial_0: ");
+//		String f = scan.nextLine();
+		
+		
 		String file = "./dane/"+f+".txt";
 		
 		BufferedReader reader;
